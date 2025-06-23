@@ -52,7 +52,7 @@ const NavBar = () => {
         <a className="btn btn-ghost text-xl">Grab Restaurant</a>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
+        <ul className="menu menu-horizontal px-1 space-x-5">
           {menuItems.map((item) => {
             return (
               <il>

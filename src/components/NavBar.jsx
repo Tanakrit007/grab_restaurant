@@ -3,16 +3,16 @@ import React from "react";
 const NavBar = () => {
   const menuItems = [
     {
+      name: "Search",
+      url: "/",
+    },
+    {
       name: "Add restaurant",
-      url: "/",
+      url: "/add",
     },
     {
-      name: "search",
-      url: "/",
-    },
-    {
-      name: "About Us",
-      url: "/",
+      name: "Update",
+      url: "/update",
     },
   ];
   return (
@@ -49,7 +49,7 @@ const NavBar = () => {
             })}
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">Grab Restaurant</a>
+        <a className="btn btn-ghost text-xl">Grab-Restaurant</a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 space-x-5">

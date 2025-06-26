@@ -1,6 +1,20 @@
 import React from "react";
 
 const Card = (props) => {
+  const handleDelete = async (id) => {
+    try {
+      const response = await fetch("http://localhost:3000/restaurants/" + id, {
+        method: "DELETE",
+      });
+      if (response.ok) {
+        alert("Restaurant added successfully !!");
+      } else {
+        alert("Failed to add restaurant.");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="card bg-base-100 w-96 shadow-sm">
       <figure>
@@ -13,8 +27,15 @@ const Card = (props) => {
         </h2>
         <p>{props.type}</p>
         <div className="card-actions justify-end">
-          <div className="badge badge-outline">Delete</div>
-          <div className="badge badge-outline">Edit</div>
+          <a href={"/update/" + props.id} className="btn btn-warning">
+            Edit
+          </a>
+          <button
+            onClick={() => handleDelete(props.id)}
+            className="btn btn-error"
+          >
+            Delete
+          </button>
         </div>
       </div>
     </div>

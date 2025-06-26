@@ -1,13 +1,27 @@
-import React, { useState } from "react";
-import NavBar from "../components/NavBar";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router";
 
-export const Add = () => {
+const Update = () => {
+  //1. get id from URL
+  const { id } = useParams();
   const [restaurant, setRestaurants] = useState({
     title: "",
     type: "",
     img: "",
   });
-
+  //2. get restaurant by id
+  useEffect(() => {
+    fetch("http://localhost:3000/restaurants/" + id)
+      .then((res) => {
+        return res.json();
+      })
+      .then((response) => {
+        setRestaurants(response);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, [id]);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setRestaurants({ ...restaurant, [name]: value });
@@ -15,8 +29,8 @@ export const Add = () => {
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch("http://localhost:3000/restaurants", {
-        method: "POST",
+      const response = await fetch("http://localhost:3000/restaurants/" + id, {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
@@ -41,7 +55,7 @@ export const Add = () => {
     <div className="container mx-auto">
       <div>
         <h1 className="title justify-center text-3xl text-center m-5 gap-x-5">
-          Add Restaurant
+          Update Restaurant
         </h1>
       </div>
       <div className="mb-5 flex justify-center items-center max-w">
@@ -85,11 +99,14 @@ export const Add = () => {
         )}
       </div>
       <div>
-        <button className="btn btn-soft btn-success" onClick={handleSubmit}>
-          Add
+        <button
+          className="btn btn-info justify-self-center text-1xl text-center m-2 gap-x-5 space-x-5"
+          onClick={handleSubmit}
+        >
+          Update
         </button>
         <button
-          className="btn btn-soft btn-error "
+          className="btn btn-secondary justify-self-center justify-center  text-1xl text-center m-2 gap-x-5 space-x-5"
           onClick={() =>
             setRestaurants({
               title: "",
@@ -104,3 +121,5 @@ export const Add = () => {
     </div>
   );
 };
+
+export default Update;

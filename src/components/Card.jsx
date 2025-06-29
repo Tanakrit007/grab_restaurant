@@ -2,6 +2,9 @@ import React from "react";
 
 const Card = (props) => {
   const handleDelete = async (id) => {
+    const confirmDelete = window.confirm("คุณต้องการลบร้านอาหารนี้หรือไม่?");
+    if (!confirmDelete) return;
+    
     try {
       const response = await fetch("http://localhost:3000/restaurants/" + id, {
         method: "DELETE",
